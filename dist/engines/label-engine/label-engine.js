@@ -53,20 +53,21 @@ var LabelEngine = function (_RequestEngine) {
     value: function createLabel(shipment) {
       var label_format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var label_layout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var is_return_label = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-      var test_label = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+      var is_return_label = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var test_label = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
 
       // https://docs.shipengine.com/docs/quickstart-create-a-label
 
       var path = 'labels';
       var body = {
-        shipment: shipment,
-        test_label: test_label,
-        is_return_label: is_return_label
+        shipment: shipment
       };
 
       if (label_format) body.label_format = label_format;
       if (label_layout) body.label_layout = label_layout;
+      if (is_return_label) body.is_return_label = is_return_label;
+      if (test_label) body.test_label = test_label;
+
       if (this.dev_mode) body.test_label = true;
 
       var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.POST, null, body);
@@ -90,19 +91,18 @@ var LabelEngine = function (_RequestEngine) {
     value: function createLabelFromRate(rate_id) {
       var label_format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var label_layout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var is_return_label = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-      var test_label = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+      var is_return_label = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var test_label = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
 
       // https://docs.shipengine.com/docs/use-a-rate-to-print-a-label
 
       var path = 'labels/rates/' + rate_id;
-      var body = {
-        test_label: test_label,
-        is_return_label: is_return_label
-      };
+      var body = {};
 
       if (label_format) body.label_format = label_format;
       if (label_layout) body.label_layout = label_layout;
+      if (is_return_label) body.is_return_label = is_return_label;
+      if (test_label) body.test_label = test_label;
       if (this.dev_mode) body.test_label = true;
 
       var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.POST, body);
@@ -126,19 +126,18 @@ var LabelEngine = function (_RequestEngine) {
     value: function createLabelFromShipment(shipment_id) {
       var label_format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var label_layout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var is_return_label = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-      var test_label = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+      var is_return_label = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var test_label = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
 
       // https://docs.shipengine.com/docs/use-a-shipment-to-print-a-label
 
       var path = 'labels/shipment/' + shipment_id;
-      var body = {
-        test_label: test_label,
-        is_return_label: is_return_label
-      };
+      var body = {};
 
       if (label_format) body.label_format = label_format;
       if (label_layout) body.label_layout = label_layout;
+      if (is_return_label) body.is_return_label = is_return_label;
+      if (test_label) body.test_label = test_label;
       if (this.dev_mode) body.test_label = true;
 
       var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.POST, null, body);

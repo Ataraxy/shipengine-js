@@ -24,18 +24,19 @@ class LabelEngine extends RequestEngine {
      * @param {Boolean} [test_label = false] - Whether the label is a test label. Default is false.
      * @returns {Promise} - JS promise wrapped around object describing the label
     */
-  createLabel(shipment, label_format = null, label_layout = null, is_return_label = false, test_label = false) {
+  createLabel(shipment, label_format = null, label_layout = null, is_return_label = null, test_label = null) {
     // https://docs.shipengine.com/docs/quickstart-create-a-label
 
     const path = 'labels';
     const body = {
       shipment,
-      test_label,
-      is_return_label,
     };
 
     if (label_format) body.label_format = label_format;
     if (label_layout) body.label_layout = label_layout;
+    if (is_return_label) body.is_return_label = is_return_label;
+    if (test_label) body.test_label = test_label;
+
     if (this.dev_mode) body.test_label = true;
 
     const options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, null, body);
@@ -53,17 +54,16 @@ class LabelEngine extends RequestEngine {
      * @param {Boolean} [test_label = false] - Whether the label is a test label. Default is false.
      * @returns {Promise} - JS Promise wrapped around an object containing information about the created label
      */
-  createLabelFromRate(rate_id, label_format = null, label_layout = null, is_return_label = false, test_label = false) {
+  createLabelFromRate(rate_id, label_format = null, label_layout = null, is_return_label = null, test_label = null) {
     // https://docs.shipengine.com/docs/use-a-rate-to-print-a-label
 
     const path = `labels/rates/${rate_id}`;
-    const body = {
-      test_label,
-      is_return_label,
-    };
+    const body = {};
 
     if (label_format) body.label_format = label_format;
     if (label_layout) body.label_layout = label_layout;
+    if (is_return_label) body.is_return_label = is_return_label;
+    if (test_label) body.test_label = test_label;
     if (this.dev_mode) body.test_label = true;
 
     const options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, body);
@@ -81,17 +81,16 @@ class LabelEngine extends RequestEngine {
      * @param {Boolean} [test_label = false] - Whether the label is a test label. Default is false.
      * @returns {Promise} - JS Promise wrapped around an object containing information about the created label
      */
-  createLabelFromShipment(shipment_id, label_format = null, label_layout = null, is_return_label = false, test_label = false) {
+  createLabelFromShipment(shipment_id, label_format = null, label_layout = null, is_return_label = null, test_label = null) {
     // https://docs.shipengine.com/docs/use-a-shipment-to-print-a-label
 
     const path = `labels/shipment/${shipment_id}`;
-    const body = {
-      test_label,
-      is_return_label,
-    };
+    const body = {};
 
     if (label_format) body.label_format = label_format;
     if (label_layout) body.label_layout = label_layout;
+    if (is_return_label) body.is_return_label = is_return_label;
+    if (test_label) body.test_label = test_label;
     if (this.dev_mode) body.test_label = true;
 
     const options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, null, body);
