@@ -1,19 +1,18 @@
-import { RequestEngine } from '../../request-engine'; 
+import { RequestEngine } from '../../request-engine';
 
 // Models
-// const Address = require('../../models/address'); 
-import { Label } from '../../models/label'; 
+// const Address = require('../../models/address');
+import { Label } from '../../models/label';
 
 
-class LabelEngine extends RequestEngine{
-    
-    constructor(api_key = null) {
-        super(api_key); 
-    }
+class LabelEngine extends RequestEngine {
+  constructor(api_key = null) {
+    super(api_key);
+  }
 
-    /**
+  /**
      * Create label for the given shipment
-     * 
+     *
      * @param {Shipment} shipment - Shipment to create label for (follows Shipment class format)
      * @param {string} shipment.service_code - service code to use to create label
      * @param {Address} shipment.ship_to - Destination address of shipment (follows Address class format)
@@ -24,29 +23,29 @@ class LabelEngine extends RequestEngine{
      * @param {Boolean} [is_return_label = false] - Whether the label is a return label. Default is false.
      * @param {Boolean} [test_label = false] - Whether the label is a test label. Default is false.
      * @returns {Promise} - JS promise wrapped around object describing the label
-     */
-    createLabel(shipment, label_format = null, label_layout = null, is_return_label = false, test_label = false) {
-        // https://docs.shipengine.com/docs/quickstart-create-a-label
+    */
+  createLabel(shipment, label_format = null, label_layout = null, is_return_label = false, test_label = false) {
+    // https://docs.shipengine.com/docs/quickstart-create-a-label
 
-        let path = 'labels';
-        let body = {
-            shipment: shipment,
-            test_label: test_label,
-            is_return_label: is_return_label
-        };
+    const path = 'labels';
+    const body = {
+      shipment,
+      test_label,
+      is_return_label,
+    };
 
-        if(label_format) body.label_format = label_format;
-        if(label_layout) body.label_layout = label_layout;  
-        if(this.dev_mode) body.test_label = true; 
+    if (label_format) body.label_format = label_format;
+    if (label_layout) body.label_layout = label_layout;
+    if (this.dev_mode) body.test_label = true;
 
-        let options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, null, body); 
-        
-        return this.request(options); 
-    }
-    
-    /**
-     * Creates a label from a previously created rate. 
-     * 
+    const options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, null, body);
+
+    return this.request(options);
+  }
+
+  /**
+     * Creates a label from a previously created rate.
+     *
      * @param {string} rate_id - Rate id previously created from a shipment
      * @param {string} [label_format = null] - The Format the label should be created in (one of Label.FORMAT_OPTIONS)
      * @param {string} [label_layout = null] - The layout the label should be created in (one of Label.LAYOUT_OPTIONS)
@@ -54,27 +53,27 @@ class LabelEngine extends RequestEngine{
      * @param {Boolean} [test_label = false] - Whether the label is a test label. Default is false.
      * @returns {Promise} - JS Promise wrapped around an object containing information about the created label
      */
-    createLabelFromRate(rate_id, label_format = null, label_layout = null, is_return_label = false, test_label = false) {
-        // https://docs.shipengine.com/docs/use-a-rate-to-print-a-label
+  createLabelFromRate(rate_id, label_format = null, label_layout = null, is_return_label = false, test_label = false) {
+    // https://docs.shipengine.com/docs/use-a-rate-to-print-a-label
 
-        let path = `labels/rates/${rate_id}`;
-        let body = {
-            test_label: test_label,
-            is_return_label: is_return_label
-        }; 
+    const path = `labels/rates/${rate_id}`;
+    const body = {
+      test_label,
+      is_return_label,
+    };
 
-        if(label_format) body.label_format = label_format;
-        if(label_layout) body.label_layout = label_layout;  
-        if(this.dev_mode) body.test_label = true;  
+    if (label_format) body.label_format = label_format;
+    if (label_layout) body.label_layout = label_layout;
+    if (this.dev_mode) body.test_label = true;
 
-        let options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, body); 
-    
-        return this.request(options); 
-    }
-    
-    /**
+    const options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, body);
+
+    return this.request(options);
+  }
+
+  /**
      * Creates a label from from a shipment id.
-     * 
+     *
      * @param {string} shipment_id - ShipEngine assigned shipment id
      * @param {string} [label_format = null] - The Format the label should be created in (one of Label.FORMAT_OPTIONS)
      * @param {string} [label_layout = null] - The layout the label should be created in (one of Label.LAYOUT_OPTIONS)
@@ -82,27 +81,27 @@ class LabelEngine extends RequestEngine{
      * @param {Boolean} [test_label = false] - Whether the label is a test label. Default is false.
      * @returns {Promise} - JS Promise wrapped around an object containing information about the created label
      */
-    createLabelFromShipment(shipment_id, label_format = null, label_layout = null, is_return_label = false, test_label = false) {
-        // https://docs.shipengine.com/docs/use-a-shipment-to-print-a-label
-        
-        let path = `labels/shipment/${shipment_id}`;
-        let body = {
-            test_label: test_label,
-            is_return_label: is_return_label
-        };
+  createLabelFromShipment(shipment_id, label_format = null, label_layout = null, is_return_label = false, test_label = false) {
+    // https://docs.shipengine.com/docs/use-a-shipment-to-print-a-label
 
-        if(label_format) body.label_format = label_format;
-        if(label_layout) body.label_layout = label_layout;  
-        if(this.dev_mode) body.test_label = true;
+    const path = `labels/shipment/${shipment_id}`;
+    const body = {
+      test_label,
+      is_return_label,
+    };
 
-        let options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, null, body); 
-        
-        return this.request(options); 
-    }
+    if (label_format) body.label_format = label_format;
+    if (label_layout) body.label_layout = label_layout;
+    if (this.dev_mode) body.test_label = true;
 
-    /**
+    const options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, null, body);
+
+    return this.request(options);
+  }
+
+  /**
      * Retrieve labels matching given query parameters
-     * 
+     *
      * @param {Object} [query_parameters] - Object of parameters to use in query
      * @param {string} [query_parameters.label_status] - label status to match against (one of Label.STATUS_OPTIONS)
      * @param {string} [query_parameters.carrier_id] - Carrier id to filter labels
@@ -112,41 +111,40 @@ class LabelEngine extends RequestEngine{
      * @param {string} [query_parameters.warehouse_id] - Warehouse id ot filter labels
      * @param {string} [query_parameters.created_at_start] - beginning created date to match labels against (formatted as YYYY-MM-DDTHH:mm:ss.sssZ)
      * @param {string} [query_parameters.created_at_end] - end created date to match labels against (formatted as YYYY-MM-DDTHH:mm:ss.sssZ)
-     * @param {number} [query_parameters.page] - page number of query results to retrieve 
+     * @param {number} [query_parameters.page] - page number of query results to retrieve
      * @param {number} [query_parameters.page_size] - size of page of a given page to retrieve
      * @param {string} [query_parameters.sort_dir] - sort direction for results (either "asc" or "desc")
      * @param {string} [query_parameters.sort_by] - sorting field (either "modified_at" or "created_at")
      * @returns {Promise} - JS Promised wrapped around an object with an array of matching labels
      */
-    queryLabels(query_parameters = {
-            label_status: Label.STATUS_OPTIONS.COMPLETED, page_size: 1 }) {
-        // https://docs.shipengine.com/docs/query-labels
+  queryLabels(query_parameters = {label_status: Label.STATUS_OPTIONS.COMPLETED, page_size: 1 }) {
+    // https://docs.shipengine.com/docs/query-labels
 
-        let path = 'labels'; 
-        let params = query_parameters;
-        let options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.GET, params);
-        
-        return this.request(options); 
-    }
+    const path = 'labels';
+    const params = query_parameters;
+    const options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.GET, params);
 
-    /**
+    return this.request(options);
+  }
+
+  /**
      * Voids a label from use
-     * 
+     *
      * @param {string} label_id - ID of label to void
      * @returns {Promise} - JS Promise wrapped around object containing approval and message
      */
-    voidLabel(label_id) {
-        // https://docs.shipengine.com/docs/void-a-label
-        
-        let path = `labels/${label_id}/void`;
-        let body = null; // NOTE: Should body be '' instead?
+  voidLabel(label_id) {
+    // https://docs.shipengine.com/docs/void-a-label
 
-        let options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.PUT, null, body); 
-    
-        return this.request(options); 
-    }
+    const path = `labels/${label_id}/void`;
+    const body = null; // NOTE: Should body be '' instead?
+
+    const options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.PUT, null, body);
+
+    return this.request(options);
+  }
 }
 
 export {
-    LabelEngine
-}
+  LabelEngine,
+};
