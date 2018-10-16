@@ -1,8 +1,15 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Shipment = undefined;
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _address = require('./address');
 
-import { Address } from './address';
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Shipment = function () {
   // TODO: consider hiding unnecessary fields behind if statemnts
@@ -49,7 +56,7 @@ var Shipment = function () {
     // TODO investigate if assigning default values could conflict with an existing package
     // assign necessary default values
     if (!shipment.validate_address) {
-      this.validate_address = Address.VALIDATION_OPTIONS.NO_VALIDATION;
+      this.validate_address = _address.Address.VALIDATION_OPTIONS.NO_VALIDATION;
     }
 
     if (!shipment.confirmation) {
@@ -87,4 +94,4 @@ Shipment.STATUS_OPTIONS = {
   CANCELLED: 'cancelled'
 };
 
-export { Shipment };
+exports.Shipment = Shipment;

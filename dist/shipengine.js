@@ -1,10 +1,17 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ShipEngine = undefined;
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _engines = require('./engines');
+
+var _models = require('./models');
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-import { AddressEngine, BatchEngine, CarrierEngine, InsuranceEngine, LabelEngine, ShipmentEngine, TrackingEngine, WarehouseEngine } from './engines';
-
-import { Label } from './models';
 
 var ShipEngine = function () {
   function ShipEngine() {
@@ -12,14 +19,14 @@ var ShipEngine = function () {
 
     _classCallCheck(this, ShipEngine);
 
-    this.addressEngine = new AddressEngine(api_key);
-    this.batchEngine = new BatchEngine(api_key);
-    this.carrierEngine = new CarrierEngine(api_key);
-    this.insuranceEngine = new InsuranceEngine(api_key);
-    this.labelEngine = new LabelEngine(api_key);
-    this.shipmentEngine = new ShipmentEngine(api_key);
-    this.trackingEngine = new TrackingEngine(api_key);
-    this.warehouseEngine = new WarehouseEngine(api_key);
+    this.addressEngine = new _engines.AddressEngine(api_key);
+    this.batchEngine = new _engines.BatchEngine(api_key);
+    this.carrierEngine = new _engines.CarrierEngine(api_key);
+    this.insuranceEngine = new _engines.InsuranceEngine(api_key);
+    this.labelEngine = new _engines.LabelEngine(api_key);
+    this.shipmentEngine = new _engines.ShipmentEngine(api_key);
+    this.trackingEngine = new _engines.TrackingEngine(api_key);
+    this.warehouseEngine = new _engines.WarehouseEngine(api_key);
   }
 
   /** *********************** Addresses ************************ */
@@ -397,7 +404,7 @@ var ShipEngine = function () {
   }, {
     key: 'queryLabels',
     value: function queryLabels() {
-      var query_parameters = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { label_status: Label.STATUS_OPTIONS.COMPLETED, page_size: 1 };
+      var query_parameters = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { label_status: _models.Label.STATUS_OPTIONS.COMPLETED, page_size: 1 };
 
       // https://docs.shipengine.com/docs/query-labels
 
@@ -838,4 +845,4 @@ var ShipEngine = function () {
   return ShipEngine;
 }();
 
-export { ShipEngine };
+exports.ShipEngine = ShipEngine;

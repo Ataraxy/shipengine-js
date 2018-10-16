@@ -1,8 +1,19 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.RequestEngine = undefined;
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _requestPromiseNative = require('request-promise-native');
 
-import request from 'request-promise-native';
+var _requestPromiseNative2 = _interopRequireDefault(_requestPromiseNative);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var RequestEngine = function () {
     function RequestEngine() {
@@ -18,7 +29,7 @@ var RequestEngine = function () {
         }
 
         this.base_url = 'https://api.shipengine.com/v1/';
-        this.request = request;
+        this.request = _requestPromiseNative2.default;
     }
 
     _createClass(RequestEngine, [{
@@ -60,4 +71,4 @@ RequestEngine.HTTPS_METHODS = {
     PATCH: 'PATCH'
 };
 
-export { RequestEngine };
+exports.RequestEngine = RequestEngine;

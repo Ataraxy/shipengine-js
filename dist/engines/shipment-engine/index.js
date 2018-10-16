@@ -1,3 +1,10 @@
-import { ShipmentEngine } from './shipment-engine';
+'use strict';
 
-export { ShipmentEngine };
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.ShipmentEngine = undefined;
+
+var _shipmentEngine = require('./shipment-engine');
+
+exports.ShipmentEngine = _shipmentEngine.ShipmentEngine;

@@ -1,3 +1,9 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // TODO change name to parcel to not conflict with JS keyword
@@ -37,4 +43,4 @@ function Package(weight) {
   }
 };
 
-export { Package };
+exports.Package = Package;

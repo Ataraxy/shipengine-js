@@ -1,4 +1,15 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.ShipmentEngine = undefined;
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _requestEngine = require('../../request-engine');
+
+var _shipment = require('../../models/shipment');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6,11 +17,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import { RequestEngine } from '../../request-engine';
-
 // Models
 // const Address = require('../../models/address'); 
-import { Shipment } from '../../models/shipment';
+
 
 var ShipmentEngine = function (_RequestEngine) {
     _inherits(ShipmentEngine, _RequestEngine);
@@ -39,14 +48,14 @@ var ShipmentEngine = function (_RequestEngine) {
             // TODO Evaluate if this step is necessary
             // Properly format shipment objects
             var formattedShipments = shipments.map(function (shipment) {
-                return new Shipment(shipment);
+                return new _shipment.Shipment(shipment);
             });
 
             var path = 'shipments';
             var body = {
                 shipments: formattedShipments
             };
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, null, body);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.POST, null, body);
 
             return this.request(options);
         }
@@ -79,11 +88,11 @@ var ShipmentEngine = function (_RequestEngine) {
         value: function updateShipment(shipment) {
             // https://docs.shipengine.com/docs/update-a-shipment
 
-            var formattedShipment = new Shipment(shipment);
+            var formattedShipment = new _shipment.Shipment(shipment);
 
             var path = 'shipments/' + shipment.shipment_id;
             var body = formattedShipment;
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.PUT, null, body);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.PUT, null, body);
 
             return this.request(options);
         }
@@ -150,7 +159,7 @@ var ShipmentEngine = function (_RequestEngine) {
 
             var path = 'shipments';
             var params = query_parameters;
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.GET, params);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.GET, params);
 
             return this.request(options);
         }
@@ -169,7 +178,7 @@ var ShipmentEngine = function (_RequestEngine) {
             // https://docs.shipengine.com/docs/tag-a-shipment
 
             var path = 'shipments/' + shipment_id + '/tags/' + tag_name;
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.POST);
 
             return this.request(options);
         }
@@ -188,7 +197,7 @@ var ShipmentEngine = function (_RequestEngine) {
             // https://docs.shipengine.com/docs/remove-a-shipment-tag
 
             var path = 'shipments/' + shipment_id + '/tags/' + tag_name;
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.DELETE);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.DELETE);
 
             return this.request(options);
         }
@@ -211,7 +220,7 @@ var ShipmentEngine = function (_RequestEngine) {
                 shipment: shipment,
                 rate_options: rate_options
             };
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, null, body);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.POST, null, body);
 
             return this.request(options);
         }
@@ -229,7 +238,7 @@ var ShipmentEngine = function (_RequestEngine) {
             // https://docs.shipengine.com/docs/create-a-tag
 
             var path = 'tags/' + tag_name;
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.POST);
 
             return this.request(options);
         }
@@ -247,7 +256,7 @@ var ShipmentEngine = function (_RequestEngine) {
             // https://docs.shipengine.com/docs/delete-a-tag
 
             var path = 'tags/' + tag_name;
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.DELETE);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.DELETE);
 
             return this.request(options);
         }
@@ -282,13 +291,13 @@ var ShipmentEngine = function (_RequestEngine) {
             // https://docs.shipengine.com/docs/rename-a-tag
 
             var path = 'tags/' + tag_name + '/' + new_tag_name;
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.PUT);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.PUT);
 
             return this.request(options);
         }
     }]);
 
     return ShipmentEngine;
-}(RequestEngine);
+}(_requestEngine.RequestEngine);
 
-export { ShipmentEngine };
+exports.ShipmentEngine = ShipmentEngine;

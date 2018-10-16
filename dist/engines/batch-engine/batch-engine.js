@@ -1,12 +1,19 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.BatchEngine = undefined;
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _requestEngine = require('../../request-engine');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-import { RequestEngine } from '../../request-engine';
 
 // Models
 // const Label = require('../../models/label'); 
@@ -51,7 +58,7 @@ var BatchEngine = function (_RequestEngine) {
 
             if (batch.rate_ids) body.rate_ids = batch.rate_ids;else body.rate_ids = [];
 
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, null, body);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.POST, null, body);
 
             return this.request(options);
         }
@@ -79,7 +86,7 @@ var BatchEngine = function (_RequestEngine) {
 
             if (batch.rate_ids) body.rate_ids = batch.rate_ids;else body.rate_ids = [];
 
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, null, body);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.POST, null, body);
 
             return this.request(options);
         }
@@ -111,7 +118,7 @@ var BatchEngine = function (_RequestEngine) {
             if (label_format) body.label_format = label_format;
             if (label_layout) body.label_layout = label_layout;
 
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, null, body);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.POST, null, body);
 
             return this.request(options);
         }
@@ -130,7 +137,7 @@ var BatchEngine = function (_RequestEngine) {
 
             var path = 'batches/' + batch_id;
 
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.GET);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.GET);
 
             return this.request(options);
         }
@@ -149,7 +156,7 @@ var BatchEngine = function (_RequestEngine) {
 
             var path = 'batches/external_batch_id/' + external_batch_id;
 
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.GET);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.GET);
 
             return this.request(options);
         }
@@ -168,7 +175,7 @@ var BatchEngine = function (_RequestEngine) {
 
             var path = 'batches/' + batch_id + '/errors';
 
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.GET);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.GET);
 
             return this.request(options);
         }
@@ -195,7 +202,7 @@ var BatchEngine = function (_RequestEngine) {
                 rate_ids: batch.rate_ids
             };
 
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, null, body);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.POST, null, body);
 
             return this.request(options);
         }
@@ -222,7 +229,7 @@ var BatchEngine = function (_RequestEngine) {
             var path = 'batches';
             var params = query_parameters;
 
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.GET, params);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.GET, params);
 
             return this.request(options);
         }
@@ -241,13 +248,13 @@ var BatchEngine = function (_RequestEngine) {
 
             var path = 'batches/' + batch_id;
 
-            var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.PUT);
+            var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.PUT);
 
             return this.request(options);
         }
     }]);
 
     return BatchEngine;
-}(RequestEngine);
+}(_requestEngine.RequestEngine);
 
-export { BatchEngine };
+exports.BatchEngine = BatchEngine;

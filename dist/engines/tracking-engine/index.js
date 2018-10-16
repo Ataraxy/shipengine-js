@@ -1,3 +1,10 @@
-import { TrackingEngine } from './tracking-engine';
+'use strict';
 
-export { TrackingEngine };
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.TrackingEngine = undefined;
+
+var _trackingEngine = require('./tracking-engine');
+
+exports.TrackingEngine = _trackingEngine.TrackingEngine;

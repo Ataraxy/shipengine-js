@@ -1,4 +1,15 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LabelEngine = undefined;
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _requestEngine = require('../../request-engine');
+
+var _label = require('../../models/label');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6,11 +17,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import { RequestEngine } from '../../request-engine';
-
 // Models
 // const Address = require('../../models/address');
-import { Label } from '../../models/label';
+
 
 var LabelEngine = function (_RequestEngine) {
   _inherits(LabelEngine, _RequestEngine);
@@ -60,7 +69,7 @@ var LabelEngine = function (_RequestEngine) {
       if (label_layout) body.label_layout = label_layout;
       if (this.dev_mode) body.test_label = true;
 
-      var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, null, body);
+      var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.POST, null, body);
 
       return this.request(options);
     }
@@ -96,7 +105,7 @@ var LabelEngine = function (_RequestEngine) {
       if (label_layout) body.label_layout = label_layout;
       if (this.dev_mode) body.test_label = true;
 
-      var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, body);
+      var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.POST, body);
 
       return this.request(options);
     }
@@ -132,7 +141,7 @@ var LabelEngine = function (_RequestEngine) {
       if (label_layout) body.label_layout = label_layout;
       if (this.dev_mode) body.test_label = true;
 
-      var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.POST, null, body);
+      var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.POST, null, body);
 
       return this.request(options);
     }
@@ -159,13 +168,13 @@ var LabelEngine = function (_RequestEngine) {
   }, {
     key: 'queryLabels',
     value: function queryLabels() {
-      var query_parameters = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { label_status: Label.STATUS_OPTIONS.COMPLETED, page_size: 1 };
+      var query_parameters = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { label_status: _label.Label.STATUS_OPTIONS.COMPLETED, page_size: 1 };
 
       // https://docs.shipengine.com/docs/query-labels
 
       var path = 'labels';
       var params = query_parameters;
-      var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.GET, params);
+      var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.GET, params);
 
       return this.request(options);
     }
@@ -185,13 +194,13 @@ var LabelEngine = function (_RequestEngine) {
       var path = 'labels/' + label_id + '/void';
       var body = null; // NOTE: Should body be '' instead?
 
-      var options = this.generateOptions(path, RequestEngine.HTTPS_METHODS.PUT, null, body);
+      var options = this.generateOptions(path, _requestEngine.RequestEngine.HTTPS_METHODS.PUT, null, body);
 
       return this.request(options);
     }
   }]);
 
   return LabelEngine;
-}(RequestEngine);
+}(_requestEngine.RequestEngine);
 
-export { LabelEngine };
+exports.LabelEngine = LabelEngine;

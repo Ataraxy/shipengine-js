@@ -117,7 +117,7 @@ class LabelEngine extends RequestEngine {
      * @param {string} [query_parameters.sort_by] - sorting field (either "modified_at" or "created_at")
      * @returns {Promise} - JS Promised wrapped around an object with an array of matching labels
      */
-  queryLabels(query_parameters = {label_status: Label.STATUS_OPTIONS.COMPLETED, page_size: 1 }) {
+  queryLabels(query_parameters = { label_status: Label.STATUS_OPTIONS.COMPLETED, page_size: 1 }) {
     // https://docs.shipengine.com/docs/query-labels
 
     const path = 'labels';
