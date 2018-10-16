@@ -269,12 +269,14 @@ class ShipEngine {
      * @param {Package[]} shipment.packages - Array of packages in shipment to create label for (follows Package class format)
      * @param {string} [label_format = null] - The Format the label should be created in (one of Label.FORMAT_OPTIONS)
      * @param {string} [label_layout = null] - The layout the label should be created in (one of Label.LAYOUT_OPTIONS)
+     * @param {Boolean} [is_return_label = null] - Whether the label is a return label. Only added if set to true.
+     * @param {Boolean} [test_label = null] - Whether the label is a test label. Only added if set to true.
      * @returns {Promise} - JS promise wrapped around object describing the label
      */
-  createLabel(shipment, label_format = null, label_layout = null) {
+  createLabel(shipment, label_format = null, label_layout = null, is_return_label = null, test_label = null) {
     // https://docs.shipengine.com/docs/quickstart-create-a-label
 
-    return this.labelEngine.createLabel(shipment, label_format, label_layout);
+    return this.labelEngine.createLabel(shipment, label_format, label_layout, is_return_label, test_label);
   }
 
   /**
@@ -283,12 +285,14 @@ class ShipEngine {
      * @param {string} shipment_id - ShipEngine assigned shipment id
      * @param {string} [label_format = null] - The Format the label should be created in (one of Label.FORMAT_OPTIONS)
      * @param {string} [label_layout = null] - The layout the label should be created in (one of Label.LAYOUT_OPTIONS)
+     * @param {Boolean} [is_return_label = null] - Whether the label is a return label. Only added if set to true.
+     * @param {Boolean} [test_label = null] - Whether the label is a test label. Only added if set to true.
      * @returns {Promise} - JS Promise wrapped around an object containing information about the created label
      */
-  createLabelFromShipment(shipment_id, label_format = null, label_layout = null) {
+  createLabelFromShipment(shipment_id, label_format = null, label_layout = null, is_return_label = null, test_label = null) {
     // https://docs.shipengine.com/docs/use-a-shipment-to-print-a-label
 
-    return this.labelEngine.createLabelFromShipment(shipment_id, label_format, label_layout);
+    return this.labelEngine.createLabelFromShipment(shipment_id, label_format, label_layout, is_return_label, test_label);
   }
 
   /**
@@ -297,12 +301,14 @@ class ShipEngine {
      * @param {string} rate_id - Rate id previously created from a shipment
      * @param {string} [label_format = null] - The Format the label should be created in (one of Label.FORMAT_OPTIONS)
      * @param {string} [label_layout = null] - The layout the label should be created in (one of Label.LAYOUT_OPTIONS)
+     * @param {Boolean} [is_return_label = null] - Whether the label is a return label. Only added if set to true.
+     * @param {Boolean} [test_label = null] - Whether the label is a test label. Only added if set to true.
      * @returns {Promise} - JS Promise wrapped around an object containing information about the created label
      */
-  createLabelFromRate(rate_id, label_format = null, label_layout = null) {
+  createLabelFromRate(rate_id, label_format = null, label_layout = null, is_return_label = null, test_label = null) {
     // https://docs.shipengine.com/docs/use-a-rate-to-print-a-label
 
-    return this.labelEngine.createLabelFromRate(rate_id, label_format, label_layout);
+    return this.labelEngine.createLabelFromRate(rate_id, label_format, label_layout, is_return_label, test_label);
   }
 
   /**
